@@ -1,6 +1,8 @@
 EventDispatcher
 ===============
 
+[![Build Status](https://travis-ci.org/abdulklarapl/EventDispatcher.png?branch=master)](https://travis-ci.org/abdulklarapl/EventDispatcher)
+
 Install
 -------
 - clone via git: `git clone git@github.com:abdulklarapl/EventDispatcher.git`
