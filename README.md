@@ -1,7 +1,10 @@
 EventDispatcher
 ===============
 
+Install
+-------
 - clone via git: `git clone git@github.com:abdulklarapl/EventDispatcher.git`
+- install via composer, add: `"adulklarapl/eventdispatcher": "dev-master"` to your composer.json / require section
 
 About
 -----
