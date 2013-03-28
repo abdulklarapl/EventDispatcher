@@ -60,6 +60,24 @@ class EventDispatcherTest extends \PHPUnit_Framework_TestCase
 
         $dispatcher->fire('foo.bar');
 
-        $this->assertArrayNotHasKey('event.foo.2', $_SESSION);
+        $this->assertArrayNotHasKey('event', $_SESSION);
+    }
+
+    /**
+     * test if event has array access
+     */
+    public function testEventArrayAccess()
+    {
+        $subscriber = new SampleSubscriber();
+        $subscriber2 = new SecondSubscriber();
+
+        $dispatcher = new Dispatcher();
+        $dispatcher->addSubscriber($subscriber2);
+        $dispatcher->addSubscriber($subscriber);
+
+        $dispatcher->fire('foo.bar');
+        
+        $this->assertNotEmpty($_SESSION['event']);
+        $this->assertEquals('bar', $_SESSION['event']['foo']);
     }
 }

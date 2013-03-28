@@ -28,6 +28,7 @@ class SecondSubscriber implements SubscriberInterface
      */
     public function fooAction(Event $event)
     {
-        $_SESSION['event.foo.2'] = rand(0, 10);
+        $event['foo'] = 'bar';
+        $_SESSION['event'] = $event;
     }
 }
