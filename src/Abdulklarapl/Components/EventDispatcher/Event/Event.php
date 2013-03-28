@@ -8,7 +8,7 @@ namespace Abdulklarapl\Components\EventDispatcher\Event;
  * @package Abdulklarapl\Components\EventDispatcher\Event
  * @author Patryk (Abdulklarapl) Szlagowski <szlagowskipatryk@gmail.com>
  */
-class Event implements EventInterface
+class Event extends EventArray implements EventInterface
 {
 
     /**
@@ -30,6 +30,9 @@ class Event implements EventInterface
         $this->propagationIsStopped = false;
     }
 
+    /**
+     * stop propagation of event
+     */
     public function stopPropagation()
     {
         $this->propagationIsStopped = true;
