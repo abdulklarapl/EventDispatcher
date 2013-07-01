@@ -1,5 +1,5 @@
 {
-	"name": "adulklarapl/eventdispatcher",
+	"name": "abdulklarapl/eventdispatcher",
 	"description": "Simply and light event dispatcher. Let's build your own system using abdulklarapl's components!",
 	"keywords": ["event", "dispatcher", "abdulklarapl", "component"],
 	"type": "library",
