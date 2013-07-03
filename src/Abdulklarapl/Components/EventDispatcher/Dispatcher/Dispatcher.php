@@ -12,7 +12,7 @@ use Abdulklarapl\Components\EventDispatcher\Event\Event;
  * @package Abdulklarapl\Components\EventDispatcher\Dispatcher
  * @author Patryk (Abdulklarapl) Szlagowski <szlagowskipatryk@gmail.com>
  */
-class Dispatcher
+class Dispatcher implements DispatcherInterface
 {
 
     /**
