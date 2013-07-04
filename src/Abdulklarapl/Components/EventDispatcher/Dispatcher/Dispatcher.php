@@ -5,6 +5,7 @@ namespace Abdulklarapl\Components\EventDispatcher\Dispatcher;
 use Abdulklarapl\Components\EventDispatcher\Subscriber\InvalidSubscriberException,
     Abdulklarapl\Components\EventDispatcher\Subscriber\SubscriberInterface;
 use Abdulklarapl\Components\EventDispatcher\Event\Event;
+use Abdulklarapl\Components\EventDispatcher\Event\EventInterface;
 
 /**
  * Class Dispatcher
@@ -19,10 +20,6 @@ class Dispatcher implements DispatcherInterface
      * @var array
      */
     private $subscribers;
-
-    public function __construct()
-    {
-    }
 
     /**
      * @param SubscriberInterface $subscriber
@@ -42,17 +39,45 @@ class Dispatcher implements DispatcherInterface
                     ));
             }
 
-            $this->subscribers[$event][] = array($subscriber, $method);
+            if ($this->isThereNoSimilarSubscriber($event, $subscriber, $method)) {
+                $this->subscribers[$event][] = array($subscriber, $method);
+            }
         }
     }
 
     /**
+     * check, if in subscribers dosn't exist similar subscriber already
+     *
+     * @param string $event
+     * @param SubscriberInterface $subscriber
+     * @param string $method
+     *
+     * @return bool
+     */
+    private function isThereNoSimilarSubscriber($event, $subscriber, $method)
+    {
+        if (empty($this->subscribers[$event])) {
+            return true;
+        }
+
+        foreach ($this->subscribers[$event] as $singleSubscriber) {
+            if ($singleSubscriber == array($subscriber, $method)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+        $app = $this->applications->get($calledApp, InternalApplication::EVENT_HELP);
      * @param $eventName
      */
-    public function fire($eventName)
+    public function fire($eventName, EventInterface $event = null)
     {
         if (!empty($this->subscribers[$eventName])) {
-            $event = new Event($eventName);
+            if (!$event) {
+                $event = new Event($eventName);
+            }
 
             foreach ($this->subscribers[$eventName] as $subscriber) {
                 call_user_func_array(array($subscriber[0], $subscriber[1]), array($event));
